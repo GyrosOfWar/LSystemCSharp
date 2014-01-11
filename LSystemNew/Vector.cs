@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace LSystemNew {
     /// <summary>
     /// A 2D Vector with immutable integer values.
-    /// 
     /// </summary>
     public struct Vector {
         public readonly int X, Y;

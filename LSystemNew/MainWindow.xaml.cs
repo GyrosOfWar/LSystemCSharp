@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using System.Collections.Immutable;
 
 namespace LSystemNew {
     /// <summary>
@@ -41,8 +39,8 @@ namespace LSystemNew {
             var hilbertRules = ImmutableDictionary.Create<char, string>().Add('A', "-BF+AFA+FB-").Add('B', "+AF-BFB-FA+");
             lsystems[1] = new LSystem("A", hilbertRules, 6, Math.PI / 2, "HilbertCurve", 6, new Vector(imgX / 2 - 150, imgY - 50));
 
-            var plantRules = ImmutableDictionary.Create<char, string>().Add('F', "FF-[-F+F]+[+F-F]").Add('X', "FF+[+F]+[-F]");
-            lsystems[2] = new LSystem("FX", plantRules, 5, DegToRad(25), "Plant", 5, new Vector(50, 300));
+            var plantRules = ImmutableDictionary.Create<char, string>().Add('F', "1FF-[2-F+F]+[3+F-F]").Add('X', "1FF+[2+F]+[3-F]");
+            lsystems[2] = new LSystem("FX", plantRules, 6, DegToRad(25), "Plant", 5, new Vector(50, 300));
 
             this.image = BitmapFactory.New(imgX, imgY);
             this.lsImage.Source = image;
