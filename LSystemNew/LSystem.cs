@@ -58,7 +58,12 @@ namespace LSystemNew {
             var result = axiomList.Aggregate((t, _) => StepOne(t));
             return result.ToString();
         }
-
+        /// <summary>
+        /// Draws the L-System to a WriteableBitmap. First computes the state string,
+        /// then computes a starting turtle position and then does a fold over the
+        /// state string, interpreting the characters as turtle commands. 
+        /// </summary>
+        /// <param name="image"></param>
         public void Draw(WriteableBitmap image) {
             var state = this.Step();
             var start = new Turtle(
@@ -81,5 +86,41 @@ namespace LSystemNew {
                 }
             });
         }
+        private static double DegToRad(double deg) {
+            return deg * (Math.PI / 180.0);
+        }
+
+        public static readonly LSystem DragonCurve = new LSystem(
+            "FX",
+            ImmutableDictionary.Create<char, string>()
+            .Add('X', "X+YF+")
+            .Add('Y', "-FX-Y"),
+            12,
+            Math.PI / 2,
+            "DragonCurve",
+            5,
+            new Vector(400, 200));
+
+        public static readonly LSystem HilbertCurve = new LSystem(
+            "A",
+            ImmutableDictionary.Create<char, string>()
+            .Add('A', "-BF+AFA+FB-")
+            .Add('B', "+AF-BFB-FA+"),
+            6,
+            Math.PI / 2,
+            "HilbertCurve",
+            6,
+            new Vector(806 / 2 - 150, 506 - 50));
+
+        public static readonly LSystem Plant = new LSystem(
+            "FX",
+            ImmutableDictionary.Create<char, string>()
+            .Add('F', "1FF-[2-F+F]+[3+F-F]")
+            .Add('X', "1FF+[2+F]+[3-F]"),
+            6,
+            DegToRad(25),
+            "Plant",
+            3,
+            new Vector(50, 300));
     }
 }

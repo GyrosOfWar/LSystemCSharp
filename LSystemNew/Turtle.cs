@@ -12,7 +12,10 @@ namespace LSystemNew {
     /// push its current state to a stack and restore its state from the stack.
     /// </summary>
     public class Turtle {
-        public class TurtleState {
+        /// <summary>
+        /// Container class to save the state of the turtle on the stack.
+        /// </summary>
+        public struct TurtleState {
             public readonly Vector Position;
             public readonly double Angle;
             public readonly Color DrawColor;

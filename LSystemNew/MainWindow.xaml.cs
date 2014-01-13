@@ -25,22 +25,9 @@ namespace LSystemNew {
         const int imgX = 809;
         const int imgY = 506;
 
-        double DegToRad(double deg) {
-            return deg * (Math.PI / 180.0);
-        }
-
         public MainWindow() {
             InitializeComponent();
-            this.lsystems = new LSystem[3];
-
-            var dragonCurveRules = ImmutableDictionary.Create<char, string>().Add('X', "X+YF+").Add('Y', "-FX-Y");
-            lsystems[0] = new LSystem("FX", dragonCurveRules, 12, Math.PI / 2, "DragonCurve", 5, new Vector(400, 200));
-
-            var hilbertRules = ImmutableDictionary.Create<char, string>().Add('A', "-BF+AFA+FB-").Add('B', "+AF-BFB-FA+");
-            lsystems[1] = new LSystem("A", hilbertRules, 6, Math.PI / 2, "HilbertCurve", 6, new Vector(imgX / 2 - 150, imgY - 50));
-
-            var plantRules = ImmutableDictionary.Create<char, string>().Add('F', "1FF-[2-F+F]+[3+F-F]").Add('X', "1FF+[2+F]+[3-F]");
-            lsystems[2] = new LSystem("FX", plantRules, 6, DegToRad(25), "Plant", 5, new Vector(50, 300));
+            this.lsystems = new LSystem[] { LSystem.DragonCurve, LSystem.Plant, LSystem.HilbertCurve };
 
             this.image = BitmapFactory.New(imgX, imgY);
             this.lsImage.Source = image;
@@ -49,7 +36,7 @@ namespace LSystemNew {
             foreach (var name in names) {
                 comboBox.Items.Add(name);
             }
-            comboBox.SelectedIndex = 0;
+            comboBox.SelectedIndex = selectedLsys;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
